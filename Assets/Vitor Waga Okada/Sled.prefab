@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 7056404673086804373}
   - component: {fileID: 7916280756470384812}
   - component: {fileID: 6471218655272363087}
-  - component: {fileID: 2902511041554755463}
-  - component: {fileID: 7656487612471938305}
+  - component: {fileID: 6881628927313572400}
+  - component: {fileID: 5494888918970843859}
   m_Layer: 0
   m_Name: Sled
   m_TagString: Untagged
@@ -113,23 +113,9 @@ Rigidbody2D:
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
---- !u!114 &2902511041554755463
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4240058008883468769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb11d521e92b6c04f83174b5872dbe0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  jump: 100
---- !u!60 &7656487612471938305
-PolygonCollider2D:
+  m_Constraints: 4
+--- !u!61 &6881628927313572400
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -137,7 +123,7 @@ PolygonCollider2D:
   m_GameObject: {fileID: 4240058008883468769}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: c32d5bd7b0825f14384156a38a2bf3ba, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -170,10 +156,22 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.5, y: 0.5}
-      - {x: -0.5, y: -0.5}
-      - {x: 0.5, y: -0.5}
-      - {x: 0.5, y: 0.5}
-  m_UseDelaunayMesh: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &5494888918970843859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4240058008883468769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb11d521e92b6c04f83174b5872dbe0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  jump: 500
+  sledObject: {fileID: 0}
+  coinAmount: {fileID: 0}

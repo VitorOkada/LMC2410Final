@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - DeathBarrier
+  - Coin
   layers:
   - Default
   - TransparentFX
@@ -56,4 +58,7 @@ TagManager:
     locked: 0
   - name: New Layer 5
     uniqueID: 4155895429
+    locked: 0
+  - name: Ground and Player
+    uniqueID: 3213702443
     locked: 0
