@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/JakeHoward/GameScene.unity
     guid: d0de4b6898be94d00b511d22d1028cac
+  - enabled: 1
+    path: Assets/Scenes/GameDemo.unity
+    guid: f6cabfa0089fb6547add961312abf1b9
   m_configObjects: {}

@@ -31,8 +31,10 @@ public class ParallaxController : MonoBehaviour
 
         foreach (var layer in layers)
         {
-            Vector3 newPos = layer.initialPos + new Vector3(camDelta.x * layer.parallaxFactor, camDelta.y * layer.parallaxFactor, 0);
-            layer.layer.position = newPos;
+            Vector3 addedVector = new Vector3(camDelta.x * layer.parallaxFactor, layer.initialPos.y, 0);
+            //camDelta.y * layer.parallaxFactor
+            Vector3 newPos = layer.initialPos + addedVector;
+            layer.layer.transform.position = newPos;
         }
     }
 }
