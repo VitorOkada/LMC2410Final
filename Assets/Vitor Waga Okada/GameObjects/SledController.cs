@@ -1,30 +1,21 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Callbacks;
 using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [SerializeField] 
-public class NewBehaviourScript : MonoBehaviour
+public class SledController : MonoBehaviour
 
 {
     [SerializeField] float speed;
     [SerializeField] float jump;
-
-    [SerializeField] Transform sledObject;
     private float Move;
     bool grounded;
-    private Rigidbody2D sled;
 
-    private int coinCounter = 0;
-    public TMPro.TextMeshProUGUI coinAmount;
-    // Start is called before the first frame update
-    void Start()
-    {
-        sled = GetComponent<Rigidbody2D>();
-    }
+    [SerializeField] Rigidbody2D sled;
+    public static SpriteRenderer sledSkin;
+    [SerializeField] TMPro.TextMeshProUGUI coinAmount;
+
 
     // Update is called once per frame
     void Update()
@@ -56,8 +47,7 @@ public class NewBehaviourScript : MonoBehaviour
 
         if (other.gameObject.CompareTag("Coin")) {
             Destroy(other.gameObject);
-            coinCounter++;
-            coinAmount.text = coinCounter.ToString();
+            MoneyGameController.Instance.updateMoneyGame();
         }
 
         if (other.gameObject.CompareTag("Finish")) {
@@ -72,4 +62,5 @@ public class NewBehaviourScript : MonoBehaviour
             grounded = false;
         }
     }
+
 }

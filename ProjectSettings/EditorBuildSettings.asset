@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
     path: Assets/Scenes/MenuScene.unity
     guid: a85fc2c2bcc54420d936c8252ed0ddbc
+  - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/JakeHoward/GameScene.unity
     guid: d0de4b6898be94d00b511d22d1028cac
@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WinScene.unity
     guid: 481d484dd867d07448c0b6de69dfd02f
+  - enabled: 1
+    path: Assets/Vitor Waga Okada/ShopSystem/ShopScene.unity
+    guid: bb3f2117049632e4386ab7d030eef00a
   m_configObjects: {}
