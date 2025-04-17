@@ -19,6 +19,10 @@ public class PauseMenu : MonoBehaviour
                 Pause();
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Minus)) {
+            SceneManager.LoadScene("ShopScene");
+        }
     }
 
     public void Resume()
