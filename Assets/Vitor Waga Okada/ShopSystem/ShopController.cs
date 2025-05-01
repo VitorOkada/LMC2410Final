@@ -16,15 +16,18 @@ public class ShopController : MonoBehaviour
     [SerializeField] UnityEngine.UI.Button item1Equip;
     [SerializeField] int item1Price;
     [SerializeField] TMPro.TextMeshProUGUI item1PriceText;
-    bool item1Bought;
     [SerializeField] UnityEngine.UI.Button item2Buy;
     [SerializeField] UnityEngine.UI.Button item2Equip;
     [SerializeField] int item2Price;
     [SerializeField] TMPro.TextMeshProUGUI item2PriceText;
+    [SerializeField] UnityEngine.UI.Button item3Buy;
+    [SerializeField] UnityEngine.UI.Button item3Equip;
+    [SerializeField] int item3Price;
+    [SerializeField] TMPro.TextMeshProUGUI item3PriceText;
 
     Scene currentScene;
     string currentSceneName;
-    bool item2Bought;
+    //bool item2Bought;
 
     private void Awake()
     {
@@ -35,41 +38,63 @@ public class ShopController : MonoBehaviour
 
         item1PriceText.text = item1Price.ToString();
         item2PriceText.text = item2Price.ToString();  
+        item3PriceText.text = item3Price.ToString();
 
-        item2Equip.gameObject.SetActive(false);
+        //item2Equip.gameObject.SetActive(false);
 
-        item1Bought = true;
-        item2Bought = false;
+        //item2Bought = false;
 
         getMoney();
     }
 
     private void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.Backslash)) {
-            Debug.Log("Loading Game Scene");
+            //Debug.Log("Loading Game Scene");
             SceneManager.LoadScene("GameDemo");
+            Time.timeScale = 1f;
         }
+        */
 
         if (SceneManager.GetActiveScene().name != "ShopScene") {
             Destroy(gameObject);
         }
 
+        //This scene check is for no nullReferenceExceptions
         if (currentSceneName == "ShopScene") {
-            if (item2Bought == false) {
+            if (SledSkinController.item2Bought == false) {
                 if (MoneyController.money < item2Price) {
                     item2Buy.interactable = false;
                     item2Equip.gameObject.SetActive(false);
                 } else {
                     item2Buy.interactable = true;
                 }
+            } else {
+                item2Buy.gameObject.SetActive(false);
+            }
+
+            if (SledSkinController.item3Bought == false) {
+                if (MoneyController.money < item3Price) {
+                    item3Buy.interactable = false;
+                    item3Equip.gameObject.SetActive(false);
+                } else {
+                    item3Buy.interactable = true;
+                }
+            } else {
+                item3Buy.gameObject.SetActive(false);
             }
         }
     }
 
+    public void goToLevelSelect() {
+        SceneManager.LoadScene("LevelSelect");
+        Time.timeScale = 1f;
+    }
+
     public void buySkin1() {
         if (MoneyController.money >= item2Price) {
-            item2Bought = true;
+            SledSkinController.Instance.boughtSkin2();
             item2Buy.gameObject.SetActive(false);
             item2Equip.gameObject.SetActive(true);
             MoneyController.Instance.loseMoney(item2Price);
@@ -77,14 +102,28 @@ public class ShopController : MonoBehaviour
         }
     }
 
+    public void buySkin2() {
+        if (MoneyController.money >= item3Price) {
+            SledSkinController.Instance.boughtSkin3();
+            item3Buy.gameObject.SetActive(false);
+            item3Equip.gameObject.SetActive(true);
+            MoneyController.Instance.loseMoney(item3Price);
+            getMoney();
+        }
+    }
+
     public void equipSkin0() {
         SledSkinController.currentSkin = 0;
-        SledSkinController.Instance.changeSkin();
+        //SledSkinController.Instance.changeSkin();
     }
 
     public void equipSkin1() {
         SledSkinController.currentSkin = 1;
-        SledSkinController.Instance.changeSkin();
+        //SledSkinController.Instance.changeSkin();
+    }
+
+    public void equipSkin2() {
+        SledSkinController.currentSkin = 2;
     }
 
     public void getMoney() {

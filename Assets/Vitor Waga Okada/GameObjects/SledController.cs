@@ -1,5 +1,3 @@
-using System.Collections;
-using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,22 +12,73 @@ public class SledController : MonoBehaviour
 
     [SerializeField] Rigidbody2D sled;
     public static SpriteRenderer sledSkin;
+    AudioSource jumpSoundEffectSource;
+    [SerializeField] AudioClip jumpSoundEffectClip;
     [SerializeField] TMPro.TextMeshProUGUI coinAmount;
+
 
 
     // Update is called once per frame
     void Update()
     {
         Move = Input.GetAxis("Horizontal");
+
+        if (SledSkinController.currentSkin == 0 || SledSkinController.currentSkin == 1) {
+            if (Input.GetKeyDown(KeyCode.A)) {
+                sled.GetComponent<SpriteRenderer>().flipX = true;
+            }
+
+            if (Input.GetKeyDown(KeyCode.D)) {
+                sled.GetComponent<SpriteRenderer>().flipX = false;
+            }
+        }
+
+        if(SledSkinController.currentSkin == 2) {
+            if (Input.GetKeyDown(KeyCode.A)) {
+                sled.GetComponent<SpriteRenderer>().flipX = false;
+            }
+
+            if (Input.GetKeyDown(KeyCode.D)) {
+                sled.GetComponent<SpriteRenderer>().flipX = true;
+            }
+        }
+
         sled.velocity = new Vector2(Move * speed, sled.velocity.y);
         
         if (Input.GetKeyDown(KeyCode.Space) && grounded) {
             Debug.Log("JUMP PRESSED");
+            jumpSoundEffectSource = GetComponent<AudioSource>();
+            jumpSoundEffectSource.clip = jumpSoundEffectClip;
+            jumpSoundEffectSource.Play();
             sled.AddForce(Vector2.up * jump, ForceMode2D.Impulse);
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("DeathBarrier")) {
+            print("Touched death!");
+            transform.position = new Vector2((float) -12.5, (float) -3.0);
+        }
+
+        if (other.gameObject.CompareTag("Coin")) {
+            Destroy(other.gameObject);
+            MoneyGameController.Instance.updateMoneyGame();
+        }
+
+        if (other.gameObject.CompareTag("Finish")) {
+            string current = SceneManager.GetActiveScene().name;
+            if (current == "GameDemo") {
+                SceneManager.LoadScene("Jake's Level");
+            }
+
+            if (current == "Jake's Level") {
+                SceneManager.LoadScene("WinScene");
+            }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other) 
     {
         print("Checking enter collision");
         if (other.gameObject.CompareTag("Ground")) {
@@ -39,20 +88,6 @@ public class SledController : MonoBehaviour
                 grounded = true;
             }
         }  
-
-        if (other.gameObject.CompareTag("DeathBarrier")) {
-            print("Touched death!");
-            transform.position = new Vector2((float) -12.5, (float) -5.0);
-        }
-
-        if (other.gameObject.CompareTag("Coin")) {
-            Destroy(other.gameObject);
-            MoneyGameController.Instance.updateMoneyGame();
-        }
-
-        if (other.gameObject.CompareTag("Finish")) {
-            SceneManager.LoadScene("WinScene");
-        }
 
     }
 

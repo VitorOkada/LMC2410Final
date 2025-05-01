@@ -10,6 +10,10 @@ public class MainMenuScript : MonoBehaviour
         SceneManager.LoadScene("GameDemo");
     }
 
+    public void LevelSelect() {
+        SceneManager.LoadScene("LevelSelect");
+    }
+
     public void QuitGame()
     {
         #if UNITY_EDITOR

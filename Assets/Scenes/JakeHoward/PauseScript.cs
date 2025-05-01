@@ -20,9 +20,6 @@ public class PauseMenu : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Minus)) {
-            SceneManager.LoadScene("ShopScene");
-        }
     }
 
     public void Resume()
@@ -37,6 +34,10 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f; // Freeze game
         isPaused = true;
+    }
+
+    public void goToShop() {
+        SceneManager.LoadScene("ShopScene");
     }
 
     public void Restart()

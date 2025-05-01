@@ -17,7 +17,7 @@ public class MoneyGameController : MonoBehaviour
     
     void Update()
     {
-        if (SceneManager.GetActiveScene().name != "GameDemo") {
+        if (!(SceneManager.GetActiveScene().name == "GameDemo" || SceneManager.GetActiveScene().name == "Jake's Level")) {
             Destroy(gameObject);
         }
     }
